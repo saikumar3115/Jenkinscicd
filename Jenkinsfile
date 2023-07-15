@@ -14,7 +14,7 @@ pipeline {
     stage('sonar code analysis') {
       steps {
       // need to integrate the sonar
-        withSonarQubeEnv("SonarQube"){
+        withSonarQubeEnv("sonar"){
             bat "mvn sonar:sonar"
         }
       }

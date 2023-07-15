@@ -11,11 +11,11 @@ pipeline {
         bat "mvn clean package"
       }
     }
-    stage('sonar code analysis') {
+    stage('SonarQube analysis') {
       steps {
-      // need to integrate the sonar
-        withSonarQubeEnv("sonar"){
-            bat "mvn sonar:sonar"
+		// Change this as per your Jenkins Configuration
+        withSonarQubeEnv('SonarQube') {
+                    bat 'mvn package sonar:sonar'
         }
       }
     }

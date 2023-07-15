@@ -4,21 +4,16 @@ pipeline {
     maven "MAVEN_HOME"
   }
   stages {
-    stage('Get the code') {
+    stage('Get the code, compile , and build') {
       steps {
         git branch: 'main', url: 'https://github.com/saikumar3115/Jenkinscicd.git'
-      }
-    }
-    stage('compile the code') {
-      steps {
-        // build the project and create a JAR file
         bat "mvn compile"
+        bat "mvn clean package"
       }
     }
-    stage('Build the code') {
+    stage('sonar code analysis') {
       steps {
-        // build the project and create a JAR file
-        bat "mvn clean package"
+      // need to integrate the sonar
       }
     }
   }

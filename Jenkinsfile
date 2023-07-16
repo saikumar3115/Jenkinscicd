@@ -50,7 +50,7 @@ pipeline {
       }
       steps {
         script {
-            bat "cd C:\Users\saiku\.jenkins\workspace\CICD\target\ && docker build -t ${DOCKER_IMAGE} ."
+            bat "cd C:\\Users\\saiku\\.jenkins\\workspace\\CICD\\target\\ && docker build -t ${DOCKER_IMAGE} ."
             def dockerImage = docker.image("${DOCKER_IMAGE}")
             docker.withRegistry('https://hub.docker.com', "dockerhubcom") {
                 dockerImage.push()

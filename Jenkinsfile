@@ -28,7 +28,17 @@ pipeline {
     stage("Build docker image") {
       steps {
       	script{
-   	  bat "docker build -t saikumar3115/springboot:1 ."
+   	  bat "docker build -t saikumar3115/springboot:2 ."
+	}
+       }
+   }
+  stage("push docker image") {
+      steps {
+      	script{
+	 withCredentials([string(credentialsId: 'dockerhubjenkins', variable: 'docker-jenkins')]) {
+     		bat "docker login -u saikumar3115 -p ${docker-jenkins}"
+	}
+   	  bat "docker push saikumar3115/springboot:2 ."
 	}
        }
    }

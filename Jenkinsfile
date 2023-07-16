@@ -46,15 +46,14 @@ pipeline {
  stage('Build and Push Docker Image') {
       environment {
         DOCKER_IMAGE = "saikumar3115/springboot:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('dockerhubcom')
+        REGISTRY_CREDENTIALS = "dockerhubcom"
+	dockerImage =''
       }
       steps {
-        script {
-            //bat "cd C:\\Users\\saiku\\.jenkins\\workspace\\CICD\\target\\ && docker build -t ${DOCKER_IMAGE} ."
-           bat "cd target\\ && docker build -t ${DOCKER_IMAGE} ."
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://hub.docker.com', "dockerhubcom") {
-                dockerImage.push()
+        script { 
+            dockerImage = docker.build DOCKER_IMAGE
+            docker.withRegistry('https://hub.docker.com', REGISTRY_CREDENTIALS) {
+            dockerImage.push()
             }
         }
       }

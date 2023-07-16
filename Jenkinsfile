@@ -52,7 +52,7 @@ pipeline {
       steps {
         script { 
             dockerImage = docker.build DOCKER_IMAGE
-            docker.withRegistry('https://hub.docker.com', REGISTRY_CREDENTIALS) {
+            docker.withRegistry('https://index.docker.io/v1/', REGISTRY_CREDENTIALS) {
             dockerImage.push()
             }
         }

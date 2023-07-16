@@ -11,6 +11,7 @@ pipeline {
         bat "mvn clean package"
       }
     }
+	  // Need to add the sonarqube scanner and create the global token in sonar and provide it in jenkins
     stage('SonarQube analysis') {
       steps {
 		// Change this as per your Jenkins Configuration
@@ -19,5 +20,20 @@ pipeline {
         }
       }
     }
+    stage("Quality gate") {
+      steps {
+      waitForQualityGate abortPipeline: true
+       }
+   }
+  }
+  post { 
+	  
+    success {
+      echo 'This will run only if successful'
+    }
+    failure {
+      echo 'This will run only if failed'
+    }
+    
   }
 }

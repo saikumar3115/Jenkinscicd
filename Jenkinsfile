@@ -28,7 +28,7 @@ pipeline {
     stage("Build docker image") {
       steps {
       	script{
-   	  bat "docker build -t saikumar3115/springboot:1"
+   	  bat "docker build -t saikumar3115/springboot:1 ."
 	}
        }
    }
